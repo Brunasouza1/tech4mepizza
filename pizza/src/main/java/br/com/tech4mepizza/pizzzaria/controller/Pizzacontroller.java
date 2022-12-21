@@ -12,39 +12,37 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.tech4mepizza.pizzzaria.model.Pizza;
-import br.com.tech4mepizza.pizzzaria.repositorio.Pizzarepositorio;
+import br.com.tech4mepizza.pizzzaria.servise.PizzaService;
 
 @RestController
 @RequestMapping("/cardapio")
 public class Pizzacontroller {
-    @Autowired
-    private Pizzarepositorio repositorio;
+  @Autowired 
+  private PizzaService servico;
 
     @PostMapping
     public Pizza cadastrarPizza(@RequestBody Pizza pizza){
-        return repositorio.save(pizza);
+       return servico.cadastrarPizza(pizza);
     }
     
     @GetMapping
     public List<Pizza> obterCardapio(){
-        return repositorio.findAll();
+        return servico.obterTodasAsPizzas();
     }
 
     @GetMapping("/{id}")
     public Optional<Pizza> obterPizza(@PathVariable String id){
-        return repositorio.findById(id);
+       return servico.obterPizzaPorId(id);
     }
 
     @DeleteMapping("/{id}")
     public void excluirPizza (@PathVariable String id){
-        repositorio.deleteById(id);
+        servico.exculirPizzaPorId(id);
 
     }
     @PutMapping("/{id}")
     public Pizza atualizarPizza(@PathVariable String id,@RequestBody Pizza pizza ){
-        pizza.setId(id);
-        return repositorio.save(pizza);
+       return servico.atualizarPizzaPorId(id, pizza);
     }
 }
