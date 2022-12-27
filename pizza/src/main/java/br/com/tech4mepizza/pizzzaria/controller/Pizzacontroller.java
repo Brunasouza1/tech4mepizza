@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +24,8 @@ public class Pizzacontroller {
   private PizzaService servico;
 
     @PostMapping
-    public Pizza cadastrarPizza(@RequestBody Pizza pizza){
-       return servico.cadastrarPizza(pizza);
+    public ResponseEntity <Pizza> cadastrarPizza(@RequestBody Pizza pizza){
+       return new ResponseEntity<>(servico.cadastrarPizza(pizza),HttpStatus.CREATED);
     }
     
     @GetMapping
