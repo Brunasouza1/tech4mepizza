@@ -29,22 +29,36 @@ public class Pizzacontroller {
     }
     
     @GetMapping
-    public List<Pizza> obterCardapio(){
-        return servico.obterTodasAsPizzas();
+    public ResponseEntity< List<Pizza>> obterCardapio(){
+        return new ResponseEntity<>(servico.obterTodasAsPizzas(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Optional<Pizza> obterPizza(@PathVariable String id){
-       return servico.obterPizzaPorId(id);
+    public ResponseEntity <Pizza> obterPizza(@PathVariable String id){
+      Optional <Pizza> retorno = servico.obterPizzaPorId(id);
+      
+      if (retorno.isPresent()){
+         return new ResponseEntity<>(retorno.get(),HttpStatus.FOUND);
+      }else{
+         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
     }
 
     @DeleteMapping("/{id}")
-    public void excluirPizza (@PathVariable String id){
-        servico.exculirPizzaPorId(id);
+    public ResponseEntity <Void> excluirPizza (@PathVariable String id){
+      servico.exculirPizzaPorId(id);
+      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+   }
+   
+      
+       @PutMapping("/{id}")
+    public ResponseEntity <Pizza>atualizarPet(@PathVariable String id ,@RequestBody Pizza pizza){
+        Optional <Pizza> retorno = servico.atualizarPetPorId(id, pizza);
 
-    }
-    @PutMapping("/{id}")
-    public Pizza atualizarPizza(@PathVariable String id,@RequestBody Pizza pizza ){
-       return servico.atualizarPizzaPorId(id, pizza);
-    }
-}
+        if(retorno.isPresent()){
+        return new ResponseEntity<>(retorno.get(),HttpStatus.ACCEPTED);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }    
+      }
+   }

@@ -12,5 +12,5 @@ public interface PizzaService {
     Optional<Pizza> obterPizzaPorId(String id);
     void exculirPizzaPorId (String id);
     Pizza cadastrarPizza(Pizza pizza);
-    Pizza atualizarPizzaPorId (String id,Pizza pizza);
+    Optional <Pizza> atualizarPetPorId (String id,Pizza pizza);
 }
