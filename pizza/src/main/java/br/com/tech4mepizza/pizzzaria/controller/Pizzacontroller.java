@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.tech4mepizza.pizzzaria.model.Pizza;
 import br.com.tech4mepizza.pizzzaria.servise.PizzaService;
+import br.com.tech4mepizza.pizzzaria.shared.PizzaCompletoDto;
+import br.com.tech4mepizza.pizzzaria.shared.PizzaDto;
 
 @RestController
 @RequestMapping("/cardapio")
@@ -24,18 +25,18 @@ public class Pizzacontroller {
   private PizzaService servico;
 
     @PostMapping
-    public ResponseEntity <Pizza> cadastrarPizza(@RequestBody Pizza pizza){
+    public ResponseEntity <PizzaCompletoDto> cadastrarPizza(@RequestBody PizzaCompletoDto pizza){
        return new ResponseEntity<>(servico.cadastrarPizza(pizza),HttpStatus.CREATED);
     }
     
     @GetMapping
-    public ResponseEntity< List<Pizza>> obterCardapio(){
+    public ResponseEntity< List<PizzaCompletoDto>> obterCardapio(){
         return new ResponseEntity<>(servico.obterTodasAsPizzas(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <Pizza> obterPizza(@PathVariable String id){
-      Optional <Pizza> retorno = servico.obterPizzaPorId(id);
+    public ResponseEntity <PizzaDto> obterPizza(@PathVariable String id){
+      Optional <PizzaDto> retorno = servico.obterPizzaPorId(id);
       
       if (retorno.isPresent()){
          return new ResponseEntity<>(retorno.get(),HttpStatus.FOUND);
@@ -52,8 +53,8 @@ public class Pizzacontroller {
    
       
        @PutMapping("/{id}")
-    public ResponseEntity <Pizza>atualizarPet(@PathVariable String id ,@RequestBody Pizza pizza){
-        Optional <Pizza> retorno = servico.atualizarPetPorId(id, pizza);
+    public ResponseEntity <PizzaCompletoDto>atualizarPet(@PathVariable String id ,@RequestBody PizzaCompletoDto pizza){
+        Optional <PizzaCompletoDto> retorno = servico.atualizarPetPorId(id, pizza);
 
         if(retorno.isPresent()){
         return new ResponseEntity<>(retorno.get(),HttpStatus.ACCEPTED);

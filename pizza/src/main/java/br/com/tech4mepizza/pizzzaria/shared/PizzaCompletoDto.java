@@ -1,20 +1,23 @@
-package br.com.tech4mepizza.pizzzaria.model;
+package br.com.tech4mepizza.pizzzaria.shared;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("pizzas")
-public class Pizza {
-    @Id
+@Document("pizzascompleto")
+public class PizzaCompletoDto {
     private String id;
- 
     private String sabor;
     private List<String> ingredientes;
     private String tamanho;
     private double valor;
-
+    
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getSabor() {
         return sabor;
     }
@@ -39,11 +42,4 @@ public class Pizza {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-
 }
