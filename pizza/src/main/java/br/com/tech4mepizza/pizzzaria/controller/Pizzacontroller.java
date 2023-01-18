@@ -2,7 +2,6 @@ package br.com.tech4mepizza.pizzzaria.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.tech4mepizza.pizzzaria.servise.PizzaService;
 import br.com.tech4mepizza.pizzzaria.shared.PizzaCompletoDto;
 import br.com.tech4mepizza.pizzzaria.shared.PizzaDto;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/cardapio")
@@ -25,7 +25,7 @@ public class Pizzacontroller {
   private PizzaService servico;
 
     @PostMapping
-    public ResponseEntity <PizzaCompletoDto> cadastrarPizza(@RequestBody PizzaCompletoDto pizza){
+    public ResponseEntity <PizzaCompletoDto> cadastrarPizza(@RequestBody @Valid PizzaCompletoDto pizza){
        return new ResponseEntity<>(servico.cadastrarPizza(pizza),HttpStatus.CREATED);
     }
     
