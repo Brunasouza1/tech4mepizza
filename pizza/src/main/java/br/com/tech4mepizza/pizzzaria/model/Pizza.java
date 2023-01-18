@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 @Document("pizzas")
 public class Pizza {
     @Id

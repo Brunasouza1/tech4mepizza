@@ -2,9 +2,8 @@ package br.com.tech4mepizza.pizzzaria.shared;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document("pizzascompleto")
+
 public class PizzaCompletoDto {
     private String id;
     private String sabor;

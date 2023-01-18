@@ -2,9 +2,9 @@ package br.com.tech4mepizza.pizzzaria.repositorio;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import br.com.tech4mepizza.pizzzaria.shared.PizzaCompletoDto;
+import br.com.tech4mepizza.pizzzaria.model.Pizza;
 
 
-public interface Pizzarepositorio extends MongoRepository<PizzaCompletoDto,String> {
+public interface Pizzarepositorio extends MongoRepository<Pizza,String> {
     
 }
